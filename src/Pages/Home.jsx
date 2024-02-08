@@ -40,14 +40,14 @@ const Home = () => {
             >
               <h1>Offers</h1>
             </Sidebar.Item>
-            <Sidebar.Item
+            {/* <Sidebar.Item
               href="#"
               className="hover:bg-blue-100"
               icon={HiUser}
               onClick={() => setActiveTab(4)}
             >
               <h1>My Trips</h1>
-            </Sidebar.Item>
+            </Sidebar.Item> */}
           </Sidebar.ItemGroup>
         </Sidebar.Items>
       </Sidebar>

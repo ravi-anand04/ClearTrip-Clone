@@ -12,6 +12,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Button, Dropdown, Label, Sidebar, TextInput } from "flowbite-react";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 
 const Hotel = () => {
   const carouselSettings = {
@@ -56,9 +57,46 @@ const Hotel = () => {
   const navigate = useNavigate("");
 
   const redirectHotelSearch = () => {
+    if (!query || !checkIn || !checkOut) {
+      toast.error("Enter mandatory fields!", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+
+      return;
+    }
+
+    if (
+      checkIn === checkOut ||
+      checkIn > checkOut ||
+      new Date(checkIn).getTime() < new Date().getTime() ||
+      new Date(checkOut).getTime() < new Date().getTime()
+    ) {
+      toast.error("Enter valid checkin and checkout date", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+
+      return;
+    }
+
     if (query.includes("-")) {
       console.log("Selected Hotel", selectedHotel);
-      navigate(`/hotel/${selectedHotel._id}`);
+      navigate(
+        `/hotel?id=${selectedHotel._id}&checkIn=${checkIn}&checkOut=${checkOut}&travellers=${travellers}`
+      );
       return;
     }
     navigate(
@@ -68,6 +106,18 @@ const Hotel = () => {
 
   return (
     <div className="main-content">
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       <section className="flex items-center gap-8">
         <div className="hotels">
           <h1 className="text-3xl font-semibold mt-2">Search Hotels</h1>

@@ -20,11 +20,13 @@ import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import { GoArrowSwitch } from "react-icons/go";
 
 const FlightSearch = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   let source = searchParams.get("source");
   let destination = searchParams.get("destination");
+  let date = searchParams.get("date");
   const sourceAddress = source.split("-")[1].trim();
   const destinationAddress = destination.split("-")[1].trim();
   source = source.substring(0, 3) + "_" + source.split(", ")[1];
@@ -105,7 +107,6 @@ const FlightSearch = () => {
     const resJSON = await res.json();
 
     setHasMore(true);
-
     console.log("Data list", resJSON);
 
     const updatedFlights = [...flights, ...resJSON.data.flights];
@@ -211,78 +212,67 @@ const FlightSearch = () => {
     setLoader(false);
   };
 
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const dayOfWeek = date.toLocaleString("default", { weekday: "long" });
+    const dayOfMonth = date.getDate();
+    const month = date.toLocaleString("default", { month: "short" });
+    const year = date.getFullYear();
+
+    return `${dayOfWeek}, ${dayOfMonth} ${month} ${year}`;
+  };
+
   return (
     <div className="px-48 max-xl:px-12">
       <div>
-        <div className="search-params mt-6 flex flex-wrap justify-between">
+        <div className="search-params mt-6 flex flex-wrap items-center justify-center gap-4">
           <input
             type="text"
             placeholder="One Way"
-            className="rounded-sm text-sm w-[200px] border border-stone-300"
+            className="rounded-lg text-sm w-[200px] border border-stone-300"
             value="One Way"
           />
           <input
             type="text"
             placeholder="Source"
-            className="rounded-sm text-sm w-[200px] border border-stone-300"
-            value={searchParams.get("source").split("_")[1]}
+            className="rounded-lg text-sm w-[200px] border border-stone-300"
+            value={searchParams.get("source").split(",")[1]}
           />
+          <div className="icon text-xl text-blue-500 rounded-full border-2 border-blue-500 p-1">
+            <GoArrowSwitch />
+          </div>
           <input
             type="text"
             placeholder="Destination"
-            className="rounded-sm text-sm w-[200px] border border-stone-300"
-            value={searchParams.get("destination").split("_")[1]}
+            className="rounded-lg text-sm w-[200px] border border-stone-300"
+            value={searchParams.get("destination").split(",")[1]}
           />
           <input
             type="text"
             placeholder="Traveller"
-            className="rounded-sm text-sm w-[200px] border border-stone-300"
-            value="1"
+            className="rounded-lg text-sm w-[200px] border border-stone-300"
+            value="1 Adult"
           />
-          <Button color="dark" className="rounded-lg px-4">
+          {/* <Button color="dark" className="rounded-lg px-4">
             Search
-          </Button>
+          </Button> */}
         </div>
-        <div className="border border-stone-200 my-4"></div>
+        <div className="border border-stone-200 mt-6"></div>
         <div className="flex gap-6 main max-md:flex-col">
           <div className="filters w-1/4">
-            <div className="selected-filters mb-4 flex flex-col gap-4 flex-wrap">
-              {/* <div className="filtered-colors flex flex-wrap gap-2">
-                  {selectedFilters.color.map((color) => (
-                    <Button size="sm" color={color && color.toLowerCase()} pill>
-                      {color}
-                    </Button>
-                  ))}
-                </div>
-                <div className="filtered-sizes flex flex-wrap gap-2">
-                  {selectedFilters.size.map((size) => (
-                    <Button size="sm" color="dark" pill>
-                      {size}
-                    </Button>
-                  ))}
-                </div> */}
-
-              {/* {clear && (
-                  <Button
-                    size="sm"
-                    gradientMonochrome="failure"
-                    pill
-                    className="w-1/3"
-                    onClick={clearFilter}
-                  >
-                    Clear filter
-                  </Button>
-                )} */}
-            </div>
             <Accordion className="sticky top-[10%] my-8">
               <Accordion.Panel>
                 <Accordion.Title>SORT BY</Accordion.Title>
                 <Accordion.Content>
                   <div className="flex flex-col flex-wrap gap-2">
                     <div className="departure flex flex-col gap-1">
-                      <label className="font-semibold">Departure</label>
+                      <label className={`font-semibold `}>Departure</label>
                       <select
-                        className="w-full"
+                        className={`w-full rounded-md ${
+                          sortBy.type === "departureTime"
+                            ? "border-2 border-emerald-500 bg-emerald-50"
+                            : ""
+                        }`}
                         onChange={(e) =>
                           sortFlights("departureTime", e.target.value)
                         }
@@ -295,7 +285,11 @@ const FlightSearch = () => {
                     <div className="stops flex flex-col gap-1">
                       <label className="font-semibold">Stops</label>
                       <select
-                        className="w-full"
+                        className={`w-full rounded-md ${
+                          sortBy.type === "stops"
+                            ? "border-2 border-emerald-500 bg-emerald-50"
+                            : ""
+                        }`}
                         onChange={(e) => sortFlights("stops", e.target.value)}
                       >
                         <option value="">Select</option>
@@ -306,7 +300,11 @@ const FlightSearch = () => {
                     <div className="price flex flex-col gap-1">
                       <label className="font-semibold">Price</label>
                       <select
-                        className="w-full"
+                        className={`w-full rounded-md ${
+                          sortBy.type === "ticketPrice"
+                            ? "border-2 border-emerald-500 bg-emerald-50"
+                            : ""
+                        }`}
                         onChange={(e) =>
                           sortFlights("ticketPrice", e.target.value)
                         }
@@ -319,7 +317,11 @@ const FlightSearch = () => {
                     <div className="duration flex flex-col gap-1">
                       <label className="font-semibold">Duration</label>
                       <select
-                        className="w-full"
+                        className={`w-full rounded-md ${
+                          sortBy.type === "duration"
+                            ? "border-2 border-emerald-500 bg-emerald-50"
+                            : ""
+                        }`}
                         onChange={(e) =>
                           sortFlights("duration", e.target.value)
                         }
@@ -373,9 +375,11 @@ const FlightSearch = () => {
           </div>
 
           <div className="products w-3/4 mb-12 max-md:w-full">
-            {/* {loader && <Loader />} */}
             <div className="select-day">
-              <SwiperComponent
+              <h1 className="text-2xl border-l-4 pl-4 border-yellow-300 font-bold mt-8">
+                {formatDate(date)}
+              </h1>
+              {/* <SwiperComponent
                 slidesPerView={3}
                 spaceBetween={16}
                 rewind={true}
@@ -409,7 +413,7 @@ const FlightSearch = () => {
                           ? "bg-gradient-to-r from-cyan-500 to-blue-500 text-white"
                           : "bg-white"
                       }`}
-                      onClick={(e) => updateAvailableSlots(e, item.date)}
+                      onClick={(e) => setSelectedDate(item.date)}
                     >
                       <h5
                         className={`${
@@ -423,7 +427,7 @@ const FlightSearch = () => {
                     </Card>
                   </SwiperSlide>
                 ))}
-              </SwiperComponent>
+              </SwiperComponent> */}
             </div>
             <div className="sort-header flex flex-wrap text-sm justify-between px-8 py-2 bg-stone-100 rounded-lg my-6">
               <span className="cursor-pointer transition text-stone-600 ease-in-out hover:text-blue-600">
@@ -473,6 +477,7 @@ const FlightSearch = () => {
                     selectedDate={selectedDate}
                     srcAddress={sourceAddress}
                     dstAddress={destinationAddress}
+                    date={formatDate(date)}
                   />
                 ))}
               </InfiniteScroll>

@@ -10,6 +10,7 @@ const FlightCard = ({
   selectedDate,
   srcAddress,
   dstAddress,
+  date,
 }) => {
   const [expand, setExpand] = useState(false);
   const [sourceAirport, setSourceAirport] = useState({});
@@ -59,9 +60,9 @@ const FlightCard = ({
 
   const bookFlight = () => {
     navigate(
-      `/flights?id=${_id}&source=${source.split("_")[1]}&destination=${
+      `/flight?id=${_id}&source=${source.split("_")[1]}&destination=${
         destination.split("_")[1]
-      }&srcAddress=${srcAddress}&dstAddress=${dstAddress}&day=${selectedDate}`
+      }&srcAddress=${srcAddress}&dstAddress=${dstAddress}&date=${date}`
     );
   };
 

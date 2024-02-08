@@ -237,7 +237,12 @@ const HotelSearch = () => {
             className="flex justify-center flex-wrap gap-4 items-center"
           >
             {hotels.map((hotel, index) => (
-              <HotelCard key={index} hotel={hotel} />
+              <HotelCard
+                key={index}
+                hotel={hotel}
+                checkInDate={checkInDate}
+                checkOutDate={checkOutDate}
+              />
             ))}
           </InfiniteScroll>
         )}

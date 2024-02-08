@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const HotelCard = ({ hotel }) => {
+const HotelCard = ({ hotel, checkInDate, checkOutDate }) => {
   const { _id, name, rating, avgCostPerNight, images, location, amenities } =
     hotel;
 
@@ -13,7 +13,9 @@ const HotelCard = ({ hotel }) => {
   const navigate = useNavigate();
 
   const handleRedirect = () => {
-    navigate(`/hotel/${_id}`);
+    navigate(
+      `/hotel?id=${_id}&checkInDate=${checkInDate}&checkOutDate=${checkOutDate}`
+    );
   };
 
   return (
