@@ -126,60 +126,69 @@ const HotelSearch = () => {
   };
 
   return (
-    <div className="px-48 max-xl:px-12">
-      <div className="header flex m-auto justify-center my-8  w-1/2">
+    <div className="px-48 max-sm:px-2">
+      <div>
+        <h1 className="sm:hidden my-8 text-2xl text-stone-600 font-bold">
+          {totalHotels} matching results for "{query}"
+        </h1>
+      </div>
+      <div className="header flex flex-wrap justify-center my-8 w-1/2 max-sm:hidden">
         <div className="location">
           <input
             readOnly
-            className="border flex border-slate-200 px-6 py-4 rounded-l-xl"
+            className="border flex border-slate-200 px-6 max-sm:px-2 max-sm:py-2 py-4 max-sm:rounded-none rounded-l-xl"
             value={searchQuery}
           />
         </div>
         <div className="check-in">
           <input
             readOnly
-            className="border flex border-slate-200 px-6 py-4"
+            className="border flex border-slate-200 px-6 max-sm:px-2 max-sm:py-2 py-4"
             value={checkIn}
           />
         </div>
         <div className="check-out">
           <input
             readOnly
-            className="border flex border-slate-200 px-6 py-4"
+            className="border flex border-slate-200 px-6 max-sm:px-2 max-sm:py-2 py-4"
             value={checkOut}
           />
         </div>
         <div className="travelers">
           <input
             readOnly
-            className="border flex border-slate-200 px-6 py-4 rounded-r-xl"
+            className="border flex border-slate-200 px-6 py-4 max-sm:p-2 max-sm:rounded-none rounded-r-xl"
             value={travelers}
           />
         </div>
       </div>
       <div className="filter-header flex flex-wrap gap-6 items-center my-8">
-        <div className="filters flex flex-wrap items-center gap-4">
-          <h1 className="text-orange-500 font-bold text-lg">Sort By :</h1>
-          <div className="price">
-            <select
-              className="border border-stone-400 rounded-xl"
-              onChange={(e) => sortHotels("avgCostPerNight", e.target.value)}
-            >
-              <option value="1">Price: Low to High</option>
-              <option value="-1">Price: High to Low</option>
-            </select>
-          </div>
-          <div className="stars">
-            <select
-              className="border border-stone-400 rounded-xl"
-              onChange={(e) => sortHotels("rating", e.target.value)}
-            >
-              <option value="1">Rating: Low to High</option>
-              <option value="-1">Rating: High to Low</option>
-            </select>
+        <div className="filters flex flex-wrap items-center gap-2">
+          <h1 className="text-orange-500 font-bold text-lg max-sm:w-full">
+            Sort By :
+          </h1>
+          <div className="sort-type flex flex-wrap gap-2">
+            <div className="price">
+              <select
+                className="border border-stone-400 rounded-xl text-sm"
+                onChange={(e) => sortHotels("avgCostPerNight", e.target.value)}
+              >
+                <option value="1">Price: Low to High</option>
+                <option value="-1">Price: High to Low</option>
+              </select>
+            </div>
+            <div className="stars">
+              <select
+                className="border border-stone-400 rounded-xl text-sm"
+                onChange={(e) => sortHotels("rating", e.target.value)}
+              >
+                <option value="1">Rating: Low to High</option>
+                <option value="-1">Rating: High to Low</option>
+              </select>
+            </div>
           </div>
         </div>
-        <div className="filters flex flex-wrap gap-4 items-center">
+        {/* <div className="filters flex flex-wrap gap-4 items-center">
           <h1 className="text-orange-500 font-bold text-lg">Price :</h1>
           <div className="range-picker flex items-center gap-2">
             <div className="min-price">
@@ -207,7 +216,7 @@ const HotelSearch = () => {
               Search
             </Button>
           </div>
-        </div>
+        </div> */}
       </div>
       <div className="border my-8"></div>
       <h1 className="mb-8 text-stone-600">

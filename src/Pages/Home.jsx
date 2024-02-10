@@ -12,8 +12,8 @@ const Home = () => {
   const [activeTab, setActiveTab] = useState(1);
 
   return (
-    <div className="flex gap-8 px-40 mt-10 bg-white">
-      <Sidebar>
+    <div className="flex gap-8 px-48 max-sm:px-2 mt-10 bg-white">
+      <Sidebar className="max-sm:hidden">
         <Sidebar.Items>
           <Sidebar.ItemGroup>
             <Sidebar.Item

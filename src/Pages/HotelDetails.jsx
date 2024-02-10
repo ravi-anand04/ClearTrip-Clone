@@ -173,7 +173,7 @@ const HotelDetails = () => {
   };
 
   return (
-    <div className="px-24 max-xl:px-12">
+    <div className="px-24 max-sm:px-2">
       <ToastContainer
         position="top-right"
         autoClose={5000}
@@ -196,14 +196,14 @@ const HotelDetails = () => {
             <b>Enter Traveler Details</b>
           </Modal.Header>
           <Modal.Body>
-            <div className="px-4">
+            <div className="px-4 max-sm:px-1">
               <div className="basic-info flex items-center gap-4">
                 <span className="text-3xl font-bold">{hotel.name}</span>
               </div>
               <h1 className="text-lg my-4 border-l-4 px-2 border-orange-500">
                 <b>Location :</b> {hotel.location}
               </h1>
-              <h1 className="text-xl flex justify-evenly mt-6">
+              <h1 className="text-xl flex items-center max-sm:gap-6 justify-evenly mt-6">
                 <span>
                   <b>Check In :</b> {formatDate(checkInDate)}
                 </span>
@@ -350,44 +350,45 @@ const HotelDetails = () => {
           </Modal.Footer>
         </Modal>
       </div>
-      <div class="text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
-        <ul class="flex flex-wrap -mb-px">
-          <li class="me-2">
-            <a
-              href="#general"
-              className="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-blue-600 hover:border-blue-300"
-            >
-              General
-            </a>
-          </li>
-          <li className="me-2">
-            <a
-              href="#amenity"
-              className="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-blue-600 hover:border-blue-300"
-            >
-              Ameneties
-            </a>
-          </li>
-          <li className="me-2">
-            <a
-              href="#rules"
-              className="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-blue-600 hover:border-blue-300"
-            >
-              Property Rules
-            </a>
-          </li>
-          <li className="me-2">
-            <a
-              href="#rooms"
-              className="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-blue-600 hover:border-blue-300"
-            >
-              Rooms
-            </a>
-          </li>
-        </ul>
-      </div>
-      <section className="flex gap-2">
-        <div className="details flex flex-col justify-between gap-2 w-1/2">
+
+      <section className="flex max-sm:flex-col gap-2">
+        <div className="details flex flex-col justify-between gap-2 w-1/2 max-sm:w-full max-sm:order-2">
+          <div class="text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
+            <ul class="flex justify-center flex-wrap -mb-px">
+              <li>
+                <a
+                  href="#general"
+                  className="inline-block p-3 border-b-2 border-transparent rounded-t-lg hover:text-blue-600 hover:border-blue-300"
+                >
+                  General
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#amenity"
+                  className="inline-block p-3 border-b-2 border-transparent rounded-t-lg hover:text-blue-600 hover:border-blue-300"
+                >
+                  Ameneties
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#rules"
+                  className="inline-block p-3 border-b-2 border-transparent rounded-t-lg hover:text-blue-600 hover:border-blue-300"
+                >
+                  Property Rules
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#rooms"
+                  className="inline-block p-3 border-b-2 border-transparent rounded-t-lg hover:text-blue-600 hover:border-blue-300"
+                >
+                  Rooms
+                </a>
+              </li>
+            </ul>
+          </div>
           <h1 id="general" className="font-semibold text-5xl mt-6">
             {hotel?.name}
           </h1>
@@ -439,7 +440,7 @@ const HotelDetails = () => {
             </ul>
           </div>
         </div>
-        <div className="w-1/2 max-md:w-3/4">
+        <div className="w-1/2 max-sm:w-full">
           <Swiper
             style={{
               "--swiper-navigation-color": "#fff",

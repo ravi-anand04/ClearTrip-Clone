@@ -62,7 +62,7 @@ const HotelCard = ({ hotel, checkInDate, checkOutDate }) => {
               + Additional Bank Discounts
             </span>
           </div>
-          <div className="amenities flex flex-wrap gap-1 justify-start mt-1">
+          <div className="amenities flex flex-wrap gap-1 justify-start mt-1 max-sm:hidden">
             <h1 className="font-bold border-l-4 px-2 w-full border-yellow-300">
               Amenities:{" "}
             </h1>

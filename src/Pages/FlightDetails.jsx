@@ -169,7 +169,7 @@ const FlightDetails = () => {
   };
 
   return (
-    <div className="px-48 max-xl:px-12">
+    <div className="px-48 max-sm:px-2">
       <ToastContainer
         position="top-right"
         autoClose={5000}
@@ -273,7 +273,7 @@ const FlightDetails = () => {
               </Modal.Footer>
             </Modal>
           </div>
-          <div className="review w-3/4 px-4">
+          <div className="review w-3/4 max-sm:w-full px-4">
             <div className="header">
               <h1 className="text-2xl font-semibold mb-8 flex gap-4">
                 <div className="border border-stone-800 rounded-full px-4 py-1 text-lg">
@@ -310,7 +310,7 @@ const FlightDetails = () => {
                 <h1 className="font-semibold text-lg mt-2">
                   Flight ID: {flightData.flightID}
                 </h1>
-                <div className="full-info flex flex-col gap-2 border-l-2 border-dashed border-stone-400 mt-6 mb-6 mx-6 px-4">
+                <div className="full-info flex flex-col gap-2 border-l-2 border-dashed border-stone-400 mt-6 mb-6 max-sm:mx-0 mx-6 px-4">
                   <div className="airport-details">
                     <h1 className="arrival flex items-end gap-2">
                       <span className="text-xl">
@@ -329,7 +329,7 @@ const FlightDetails = () => {
                     </h1>
                   </div>
                   <div className="airport-details">
-                    <h1 className="arrival flex items-end gap-2">
+                    <h1 className="arrival flex items-start gap-2">
                       <span className="text-xl">{flightData.arrivalTime}</span>
                       <span className="text-xl font-bold">
                         {flightData.destination}
@@ -338,18 +338,65 @@ const FlightDetails = () => {
                     </h1>
                   </div>
                 </div>
+                <div className="price mb-8 flex flex-col gap-4 px-4 py-6 border border-stone-300 sm:hidden rounded-lg text-sm">
+                  <div className="flex justify-between items-center total-price">
+                    <h1 className="text-lg">Total price</h1>
+                    <h1 className="text-xl font-bold">₹6,733</h1>
+                  </div>
+                  <h1 className="mb-4 text-stone-600 border-b border-stone-300 pb-6">
+                    1 adult
+                  </h1>
+                  <div className="flex justify-between items-center base">
+                    <h1 className="font-semibold text-stone-500">
+                      Base fare (1 traveller)
+                    </h1>
+                    <h1 className="font-semibold text-stone-500">₹5,533</h1>
+                  </div>
+                  <div className="flex justify-between items-center taxes">
+                    <h1 className="font-semibold text-stone-500">
+                      Taxes and fees
+                    </h1>
+                    <h1 className="font-semibold text-stone-500">₹1,200</h1>
+                  </div>
+                  <div className="flex justify-between items-center add-ons">
+                    <h1 className="font-semibold text-stone-500">Add ons</h1>
+                    <h1 className="font-semibold text-stone-500">Free</h1>
+                  </div>
+                  <div className="flex justify-between medi-cancel">
+                    <h1 className="font-semibold text-stone-500">
+                      Medi-cancel benefit
+                    </h1>
+                    <h1 className="font-semibold text-stone-500">
+                      <span className="line-through">₹199</span>{" "}
+                      <span className="text-green-400">Free</span>
+                    </h1>
+                  </div>
+                  <hr />
+                  <div className="credit-card flex justify-between items-start bg-rose-100 p-3">
+                    <img
+                      src="https://fastui.cltpstatic.com/image/upload/offermgmt/images/emicallouticon.svg"
+                      height="24px"
+                    />
+                    <div className="info text-stone-500 font-semibold text-center">
+                      Pay in 6 interest free EMIs at ₹1,402/mo, with your credit
+                      card
+                    </div>
+                  </div>
+                </div>
                 <div className="searches flex gap-6 my-8 flex-wrap">
                   <div className="card-info flex flex-col gap-4 p-4 bg-red-50 w-full rounded-lg">
                     <img
                       src="https://fastui.cltpstatic.com/raw/upload/ct-air-desktop-pwa-prod/en/static/media/Axis.85e32d6c.svg"
                       alt=""
-                      className="absolute mx-56"
+                      className="absolute mx-36"
                     />
                     <div className="header flex justify-between">
                       <h1 className="font-bold">
                         Exclusive on Axis Bank credit cards
                       </h1>
-                      <AxisBank />
+                      <div>
+                        <AxisBank />
+                      </div>
                     </div>
                     <hr />
                     <div className="flex flex-col gap-2 info-row">
@@ -425,7 +472,7 @@ const FlightDetails = () => {
                             ""
                           )
                         }
-                        className="w-[300px]"
+                        className="w-[300px] max-sm:w-full"
                       />
                     </div>
                     <div>
@@ -439,7 +486,7 @@ const FlightDetails = () => {
                         required
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        className="w-[300px]"
+                        className="w-[300px] max-sm:w-full"
                         helperText={
                           error.email ? (
                             <>
@@ -453,7 +500,7 @@ const FlightDetails = () => {
                         }
                       />
                     </div>
-                    <Button className="bg-orange-500 px-4 rounded-md mb-4 mt-4">
+                    <Button className="bg-orange-500 px-4 rounded-md mb-4 mt-4 w-full">
                       <span
                         className="text-md"
                         onClick={() => {
@@ -586,7 +633,7 @@ const FlightDetails = () => {
                         />
                       </div>
                       <Button
-                        className="bg-orange-500 px-6 rounded-md mt-8"
+                        className="bg-orange-500 px-6 rounded-md mt-8 w-full"
                         onClick={submitForm}
                       >
                         Make Payment
@@ -597,7 +644,7 @@ const FlightDetails = () => {
               </div>
             )}
           </div>
-          <div className="price sticky top-20 mb-8 flex flex-col gap-4 px-4 py-6 border border-stone-300 w-1/4 rounded-lg text-sm">
+          <div className="price max-sm:hidden sticky top-20 mb-8 flex flex-col gap-4 px-4 py-6 border border-stone-300 w-1/4 rounded-lg text-sm">
             <div className="flex justify-between items-center total-price">
               <h1 className="text-lg">Total price</h1>
               <h1 className="text-xl font-bold">₹6,733</h1>

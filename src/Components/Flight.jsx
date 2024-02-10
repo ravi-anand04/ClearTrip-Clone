@@ -169,7 +169,7 @@ const Flight = () => {
             Enjoy hassle free bookings with Cleartrip
           </h1>
           <div className="booking-card">
-            <div className="booking-card flex flex-col px-8 py-6 border-2 rounded-xl shadow-lg shadow-slate-200 my-6 relative">
+            <div className="booking-card flex flex-col px-4 py-4 border-2 rounded-xl shadow-lg shadow-slate-200 my-6 relative">
               <div className="count mb-6 m-auto">
                 <Dropdown
                   label={`1 Adult, ${classType}`}
@@ -242,10 +242,10 @@ const Flight = () => {
               <section className="flex flex-col items-end">
                 <div className="where flex justify-start gap-4 items-center border rounded-md mb-4 px-4 py-2">
                   <div className="input flex items-center gap-4">
-                    <MdOutlineFlightTakeoff className="text-2xl text-stone-400" />
+                    <MdOutlineFlightTakeoff className="text-2xl max-sm:hidden text-stone-400" />
                     <div className="from-search">
                       <input
-                        className="w-[250px] px-4 py-2"
+                        className="w-[250px] max-sm:w-full px-2 py-2"
                         placeholder="Where from?"
                         value={from}
                         onChange={(e) => fetchAirports(e, "from")}
@@ -272,10 +272,10 @@ const Flight = () => {
                     <GoArrowSwitch />
                   </div>
                   <div className="input flex gap-4 items-center justify-center">
-                    <MdOutlineFlightLand className="text-2xl text-stone-400 ml-6" />
+                    <MdOutlineFlightLand className="text-2xl max-sm:hidden text-stone-400 ml-6" />
                     <div className="to-search">
                       <input
-                        className="w-[250px] px-4 py-2"
+                        className="w-[250px] max-sm:w-full px-2 py-2"
                         placeholder="Where to?"
                         value={to}
                         onChange={(e) => fetchAirports(e, "to")}
@@ -306,11 +306,11 @@ const Flight = () => {
                     type="date"
                     value={date}
                     onChange={(e) => setDate(e.target.value)}
-                    className="rounded-lg border-stone-300 px-8 py-3 w-1/2"
+                    className="rounded-lg border-stone-300 px-4 py-3 w-1/2 max-sm:block"
                   />
                   <Button
                     gradientMonochrome="failure"
-                    className="rounded-md w-1/2 text-lg"
+                    className="rounded-md w-1/2 max-sm:block text-lg"
                     onClick={redirectFlightSearch}
                   >
                     Search Flights
@@ -320,7 +320,7 @@ const Flight = () => {
             </div>
           </div>
         </div>
-        <div className="offers flex flex-col gap-4">
+        <div className="offers flex flex-col gap-4 max-sm:hidden">
           <div className="card border-stone-400 shadow-xl w-[300px]">
             <Slider {...carouselSettings}>
               {offerCards.map((card) => (
@@ -352,8 +352,8 @@ const Flight = () => {
         </div>
       </section>
       <div className="popular-searches mt-6">
-        <h1 className="text-2xl font-semibold">Popular searches</h1>
-        <div className="searches flex gap-6 mt-6 flex-wrap bg-red-100 p-4 rounded-md">
+        {/* <h1 className="text-2xl font-bold border-l-4 border-orange-500 pl-2">Popular searches</h1> */}
+        <div className="searches flex gap-6 mt-6 flex-wrap bg-red-100 p-2 rounded-md">
           <img
             alt="Feature Logo"
             src="https://fastui.cltpstatic.com/image/upload/offermgmt/images/mediCancelIcon.svg"
@@ -374,7 +374,10 @@ const Flight = () => {
           <h1>Cross btn</h1>
         </div>
       </div>
-      <div className="offers-container flex flex-wrap justify-between my-4 space-y-12 items-end">
+      <h1 className="text-2xl font-bold my-4 sm:mt-4 border-l-4 max-sm:my-6 border-orange-500 pl-2">
+        Card Offers
+      </h1>
+      <div className="offers-container flex flex-wrap justify-evenly max-sm:justify-center space-y-8 items-end">
         {packages.map((card) => (
           <img
             key={card.id}
@@ -384,10 +387,13 @@ const Flight = () => {
           />
         ))}
       </div>
-      <div className="app-download my-16">
+      <div className="app-download my-16 max-sm:my-8 max-sm:hidden">
         <img src={mobileDownload} alt="" className="cursor-pointer" />
       </div>
-      <div className="popular-destinations justify-center flex flex-wrap gap-8 my-8">
+      <h1 className="text-2xl font-bold border-l-4 max-sm:my-6 border-orange-500 pl-2">
+        Popular searches
+      </h1>
+      <div className="popular-destinations justify-center flex flex-wrap gap-8 my-8 max-sm:gap-4">
         {popularDestinations.map((card) => (
           <div className="destination relative text-white">
             {/* <div className="details"></div> */}

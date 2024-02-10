@@ -2,14 +2,14 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-800 text-white p-8">
+    <footer className="bg-gray-800 text-white p-8 max-sm:p-4">
       <div className="container mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           <div>
             <h2 className="text-xl font-bold mb-4">
               Popular Domestic Flight Routes
             </h2>
-            <ul className=" pl-4">
+            <ul className="pl-4 max-sm:pl-0">
               <li>Delhi Goa flights</li>
               <li>Mumbai Delhi flights</li>
               <li>Delhi Kolkata flights</li>
@@ -24,7 +24,7 @@ const Footer = () => {
             </ul>
           </div>
 
-          <div>
+          <div className="max-sm:hidden">
             <h2 className="text-xl font-bold mb-4">
               Popular International Flight Routes
             </h2>
@@ -43,7 +43,7 @@ const Footer = () => {
             </ul>
           </div>
 
-          <div>
+          <div className="max-sm:hidden">
             <h2 className="text-xl font-bold mb-4">Popular Hotels</h2>
             <ul className="pl-4">
               <li>Goa hotels</li>
@@ -61,7 +61,7 @@ const Footer = () => {
           </div>
           <div>
             <h2 className="text-xl font-bold mb-4">Popular Hotel Chains</h2>
-            <ul className="pl-4">
+            <ul className="pl-4 max-sm:pl-0">
               <li>Taj group</li>
               <li>Sarovar group of hotels</li>
               <li>V resorts</li>

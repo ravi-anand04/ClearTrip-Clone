@@ -223,19 +223,19 @@ const FlightSearch = () => {
   };
 
   return (
-    <div className="px-48 max-xl:px-12">
+    <div className="px-48 max-sm:px-2">
       <div>
         <div className="search-params mt-6 flex flex-wrap items-center justify-center gap-4">
           <input
             type="text"
             placeholder="One Way"
-            className="rounded-lg text-sm w-[200px] border border-stone-300"
+            className="rounded-lg text-sm w-[200px] max-sm:hidden border border-stone-300"
             value="One Way"
           />
           <input
             type="text"
             placeholder="Source"
-            className="rounded-lg text-sm w-[200px] border border-stone-300"
+            className="rounded-lg text-sm w-[200px] max-sm:w-[150px] border border-stone-300"
             value={searchParams.get("source").split(",")[1]}
           />
           <div className="icon text-xl text-blue-500 rounded-full border-2 border-blue-500 p-1">
@@ -244,23 +244,31 @@ const FlightSearch = () => {
           <input
             type="text"
             placeholder="Destination"
-            className="rounded-lg text-sm w-[200px] border border-stone-300"
+            className="rounded-lg text-sm w-[200px] max-sm:w-[150px] border border-stone-300"
             value={searchParams.get("destination").split(",")[1]}
           />
           <input
             type="text"
             placeholder="Traveller"
-            className="rounded-lg text-sm w-[200px] border border-stone-300"
+            className="rounded-lg text-sm w-[200px] max-sm:hidden border border-stone-300"
             value="1 Adult"
           />
           {/* <Button color="dark" className="rounded-lg px-4">
             Search
           </Button> */}
         </div>
+        <div className="sm:hidden px-2 mt-2 text-stone-500 font-semibold">
+          <span>
+            <h1 className="text-center">One Way, Traveller: 1 Adult</h1>
+          </span>
+        </div>
         <div className="border border-stone-200 mt-6"></div>
         <div className="flex gap-6 main max-md:flex-col">
-          <div className="filters w-1/4">
-            <Accordion className="sticky top-[10%] my-8">
+          <div className="filters w-1/4 max-sm:w-full">
+            <Accordion
+              className="sticky top-[10%] my-8 max-sm:my-4"
+              collapseAll
+            >
               <Accordion.Panel>
                 <Accordion.Title>SORT BY</Accordion.Title>
                 <Accordion.Content>
@@ -374,7 +382,7 @@ const FlightSearch = () => {
             </Accordion>
           </div>
 
-          <div className="products w-3/4 mb-12 max-md:w-full">
+          <div className="products w-3/4 mb-12 max-sm:w-full">
             <div className="select-day">
               <h1 className="text-2xl border-l-4 pl-4 border-yellow-300 font-bold mt-8">
                 {formatDate(date)}
@@ -429,7 +437,7 @@ const FlightSearch = () => {
                 ))}
               </SwiperComponent> */}
             </div>
-            <div className="sort-header flex flex-wrap text-sm justify-between px-8 py-2 bg-stone-100 rounded-lg my-6">
+            <div className="sort-header max-sm:hidden flex flex-wrap text-sm justify-between px-8 py-2 bg-stone-100 rounded-lg my-6">
               <span className="cursor-pointer transition text-stone-600 ease-in-out hover:text-blue-600">
                 Airlines
               </span>

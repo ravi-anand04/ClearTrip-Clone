@@ -70,15 +70,17 @@ const FlightCard = ({
     <div className="main">
       <div className="rounded-md shadow-lg border border-stone-200">
         <div
-          className={`flight-info flex flex-wrap items-center justify-between py-2 px-4 ${
+          className={`flight-info flex flex-wrap items-center justify-between py-2 px-4 max-sm:px-2 ${
             expand ? "border-b-0" : ""
           } `}
         >
-          <div className="airline">
-            <h1>FLIGHT</h1>
-            <span>{flightID}</span>
+          <div className="airline max-sm:text-sm">
+            <h1 className="max-sm:font-bold">FLIGHT</h1>
+            <span className="w-48 max-sm:font-bold">
+              {flightID.split("-")[0]}
+            </span>
             <h1
-              className="text-blue-500 text-xs font-semibold mt-2 cursor-pointer"
+              className="text-blue-500 text-xs font-semibold mt-2 cursor-pointer max-sm:hidden"
               onClick={() => setExpand(!expand)}
             >
               {expand ? "Hide Details" : "Flight Details"}
@@ -101,10 +103,13 @@ const FlightCard = ({
               Get ₹300 off with CTDOM
             </h1>
           </div>
-          <div className="book-btn">
-            <Button className="bg-orange-500" onClick={bookFlight}>
+          <div className="book-btn m-auto">
+            <button
+              className="bg-orange-500 px-4 py-1 rounded-lg text-white font-semibold"
+              onClick={bookFlight}
+            >
               Book
-            </Button>
+            </button>
           </div>
         </div>
         <div

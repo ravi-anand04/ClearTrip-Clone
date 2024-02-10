@@ -27,7 +27,7 @@ const Navbar = () => {
 
   return (
     <div className="sticky top-0 shadow-xl z-10 bg-white py-2">
-      <div className="nav-top flex justify-between py-1 px-48 max-lg:px-12 max-sm:px-1">
+      <div className="nav-top flex flex-wrap justify-between py-1 px-48 max-sm:px-2">
         <div className="flex gap-2 items-center">
           <Link to={`/`}>
             <Logo />
@@ -53,7 +53,7 @@ const Navbar = () => {
           ) : (
             <>
               <div
-                className="cursor-pointer rounded-xl border border-black px-4 py-2 font-semibold"
+                className="cursor-pointer rounded-xl border border-black px-2 py-2 font-semibold"
                 onClick={() => setLoginModal(true)}
               >
                 Log in / Sign up

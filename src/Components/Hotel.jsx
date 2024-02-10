@@ -119,7 +119,7 @@ const Hotel = () => {
         theme="dark"
       />
       <section className="flex items-center gap-8">
-        <div className="hotels">
+        <div className="hotels m-auto">
           <h1 className="text-3xl font-semibold mt-2">Search Hotels</h1>
           <h1 className="font-semibold mt-2 text-stone-600">
             Enjoy hassle free bookings with Cleartrip
@@ -155,20 +155,20 @@ const Hotel = () => {
                   </div>
                 </div>
               </section>
-              <div className="submit mt-6">
-                <div className="date-picker flex gap-6">
+              <div className="submit mt-6 max-sm:mt-2">
+                <div className="date-picker flex gap-6 max-sm:flex-col max-sm:gap-2">
                   <input
                     value={checkIn}
                     onChange={(e) => setCheckIn(e.target.value)}
                     type="date"
-                    className="rounded-lg border-stone-300 px-8 py-3 w-1/2"
+                    className="rounded-lg border-stone-300 px-8 py-3 max-sm:w-full"
                   />
 
                   <input
                     value={checkOut}
                     onChange={(e) => setCheckOut(e.target.value)}
                     type="date"
-                    className="rounded-lg border-stone-300 px-8 py-3 w-1/2"
+                    className="rounded-lg border-stone-300 px-8 py-3 max-sm:w-full"
                   />
                   <select className="rounded-lg border-stone-300 px-4 py-3">
                     <option value="1 Room, 1 Adult">1 Room, 1 Adult</option>
@@ -176,7 +176,7 @@ const Hotel = () => {
                 </div>
                 <Button
                   gradientMonochrome="failure"
-                  className="rounded-md w-1/3 text-lg mt-4 mx-auto"
+                  className="rounded-md w-1/3 text-lg mt-4 mx-auto max-sm:w-full"
                   onClick={redirectHotelSearch}
                 >
                   Search Hotels
@@ -185,7 +185,7 @@ const Hotel = () => {
             </div>
           </div>
         </div>
-        <div className="offers flex flex-col gap-4">
+        <div className="offers flex flex-col gap-4 max-sm:hidden">
           <div className="card border-stone-400 shadow-xl w-[300px]">
             <Slider {...carouselSettings}>
               {offerCards.map((card) => (
@@ -216,8 +216,10 @@ const Hotel = () => {
           </div>
         </div>
       </section>
-      <div className="popular-searches mt-6">
-        <h1 className="text-2xl font-semibold">Popular searches</h1>
+      <div className="popular-searches mt-6 ">
+        <h1 className="text-2xl font-semibold border-l-4 border-orange-500 pl-2">
+          Popular searches
+        </h1>
         <div className="searches flex gap-6 mt-6 flex-wrap bg-red-100 p-4 rounded-md">
           <img
             alt="Feature Logo"
@@ -239,7 +241,10 @@ const Hotel = () => {
           <h1>Cross btn</h1>
         </div>
       </div>
-      <div className="offers-container flex flex-wrap justify-between my-4 space-y-12 items-end">
+      <h1 className="text-2xl font-bold my-4 sm:mt-4 border-l-4 max-sm:my-6 border-orange-500 pl-2">
+        Card Offers
+      </h1>
+      <div className="offers-container flex flex-wrap justify-evenly max-sm:justify-center my-4 space-y-12 items-end">
         {packages.map((card) => (
           <img
             key={card.id}
@@ -249,10 +254,10 @@ const Hotel = () => {
           />
         ))}
       </div>
-      <div className="app-download my-16">
+      <div className="app-download my-16 max-sm:my-8">
         <img src={mobileDownload} alt="" className="cursor-pointer" />
       </div>
-      <div className="popular-destinations justify-center flex flex-wrap gap-8 my-8">
+      <div className="popular-destinations justify-center flex flex-wrap gap-8 my-8 max-sm:gap-4">
         {popularDestinations.map((card) => (
           <div className="destination relative text-white">
             {/* <div className="details"></div> */}
