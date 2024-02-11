@@ -76,9 +76,7 @@ const FlightCard = ({
         >
           <div className="airline max-sm:text-sm">
             <h1 className="max-sm:font-bold">FLIGHT</h1>
-            <span className="w-48 max-sm:font-bold">
-              {flightID.split("-")[0]}
-            </span>
+            <span className="w-48 font-bold">{flightID.split("-")[0]}</span>
             <h1
               className="text-blue-500 text-xs font-semibold mt-2 cursor-pointer max-sm:hidden"
               onClick={() => setExpand(!expand)}
@@ -103,7 +101,7 @@ const FlightCard = ({
               Get ₹300 off with CTDOM
             </h1>
           </div>
-          <div className="book-btn m-auto">
+          <div className="book-btn">
             <button
               className="bg-orange-500 px-4 py-1 rounded-lg text-white font-semibold"
               onClick={bookFlight}

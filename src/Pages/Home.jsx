@@ -12,29 +12,41 @@ const Home = () => {
   const [activeTab, setActiveTab] = useState(1);
 
   return (
-    <div className="flex gap-8 px-48 max-sm:px-2 mt-10 bg-white">
+    <div className="flex max-sm:flex-col max-sm:gap-4 gap-8 px-48 max-sm:px-2 mt-10 bg-white">
       <Sidebar className="max-sm:hidden">
         <Sidebar.Items>
           <Sidebar.ItemGroup>
             <Sidebar.Item
-              href="#"
-              className="hover:bg-blue-100"
+              href="#flights"
+              className={` ${
+                activeTab === 1
+                  ? "hover:bg-orange-500 bg-orange-400 text-white"
+                  : "bg-stone-100"
+              }`}
               icon={HiChartPie}
               onClick={() => setActiveTab(1)}
             >
               <h1>Flights</h1>
             </Sidebar.Item>
             <Sidebar.Item
-              href="#"
-              className="hover:bg-blue-100"
+              href="#hotels"
+              className={` ${
+                activeTab === 2
+                  ? "hover:bg-orange-500 bg-orange-400 text-white"
+                  : "bg-stone-100"
+              }`}
               icon={HiViewBoards}
               onClick={() => setActiveTab(2)}
             >
               <h1>Hotels</h1>
             </Sidebar.Item>
             <Sidebar.Item
-              href="#"
-              className="hover:bg-blue-100"
+              href="#offers"
+              className={` ${
+                activeTab === 3
+                  ? "hover:bg-orange-500 bg-orange-400 text-white"
+                  : "bg-stone-100"
+              }`}
               icon={HiInbox}
               onClick={() => setActiveTab(3)}
             >
@@ -51,6 +63,32 @@ const Home = () => {
           </Sidebar.ItemGroup>
         </Sidebar.Items>
       </Sidebar>
+      <div className="sm:hidden flex flex-wrap justify-around">
+        <div
+          className={`flight ${
+            activeTab === 1 ? "bg-orange-400 text-white" : "bg-stone-100"
+          } font-semibold border border-slate-400 px-6 py-2 rounded-lg`}
+          onClick={() => setActiveTab(1)}
+        >
+          Flights
+        </div>
+        <div
+          className={`hotel ${
+            activeTab === 2 ? "bg-orange-400 text-white" : "bg-stone-100"
+          } font-semibold border border-slate-400 px-6 py-2 rounded-lg`}
+          onClick={() => setActiveTab(2)}
+        >
+          Hotels
+        </div>
+        <div
+          className={`offers ${
+            activeTab === 3 ? "bg-orange-400 text-white" : "bg-stone-100"
+          } font-semibold border border-slate-400 px-6 py-2 rounded-lg`}
+          onClick={() => setActiveTab(3)}
+        >
+          Offers
+        </div>
+      </div>
       <div className="conditional-view">
         {activeTab == 1 && <Flight />}
         {activeTab == 2 && <Hotel />}

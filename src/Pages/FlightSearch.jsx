@@ -437,7 +437,7 @@ const FlightSearch = () => {
                 ))}
               </SwiperComponent> */}
             </div>
-            <div className="sort-header max-sm:hidden flex flex-wrap text-sm justify-between px-8 py-2 bg-stone-100 rounded-lg my-6">
+            {/* <div className="sort-header max-sm:hidden flex flex-wrap text-sm justify-between px-8 py-2 bg-stone-100 rounded-lg my-6">
               <span className="cursor-pointer transition text-stone-600 ease-in-out hover:text-blue-600">
                 Airlines
               </span>
@@ -453,7 +453,8 @@ const FlightSearch = () => {
               <span className="cursor-pointer transition text-stone-600 ease-in-out hover:text-blue-600">
                 Price
               </span>
-            </div>
+            </div> */}
+            <div className="mt-8"></div>
             {loader && <Loader />}
             {flights.length == 0 ? (
               <div className="mt-12 flex flex-col items-center">

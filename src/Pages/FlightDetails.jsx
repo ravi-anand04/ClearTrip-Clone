@@ -400,7 +400,7 @@ const FlightDetails = () => {
                     </div>
                     <hr />
                     <div className="flex flex-col gap-2 info-row">
-                      <div className="flex justify-start gap-24 info-row1">
+                      <div className="flex justify-start gap-24 max-sm:gap-12 info-row1">
                         <h1 className="flex items-center gap-4">
                           <Rupee /> No convenience Fee
                         </h1>
@@ -409,7 +409,7 @@ const FlightDetails = () => {
                           ₹1
                         </h1>
                       </div>
-                      <div className="flex justify-start gap-24 info-row2">
+                      <div className="flex justify-start gap-24 max-sm:gap-12 info-row2">
                         <h1 className="flex items-center gap-4">
                           <Seat /> Free seat up to ₹700
                         </h1>
@@ -439,7 +439,6 @@ const FlightDetails = () => {
                     </p>
                     <p>2.5k travellers availed in last one month</p>
                   </div>
-                  <h1>Cross btn</h1>
                 </div>
                 <div className="border border-stone-300 mb-8"></div>
                 <div className="contact-details">
@@ -456,7 +455,7 @@ const FlightDetails = () => {
                       </div>
                       <TextInput
                         id="mobile"
-                        type="text"
+                        type="number"
                         placeholder="Enter mobile number"
                         required
                         value={mobile}
@@ -475,8 +474,8 @@ const FlightDetails = () => {
                         className="w-[300px] max-sm:w-full"
                       />
                     </div>
-                    <div>
-                      <div className="mb-2 block">
+                    <div className="mb-8">
+                      <div className="my-2 block">
                         <Label htmlFor="email1" value="Your email" />
                       </div>
                       <TextInput
@@ -500,7 +499,7 @@ const FlightDetails = () => {
                         }
                       />
                     </div>
-                    <Button className="bg-orange-500 px-4 rounded-md mb-4 mt-4 w-full">
+                    {/* <Button className="bg-orange-500 px-4 rounded-md mb-4 mt-4 w-full">
                       <span
                         className="text-md"
                         onClick={() => {
@@ -531,7 +530,7 @@ const FlightDetails = () => {
                       >
                         Save
                       </span>
-                    </Button>
+                    </Button> */}
                   </div>
                   <div className="border border-stone-300 mb-8"></div>
                   <div className="traveller-details flex flex-col flex-wrap justify-between">
@@ -608,7 +607,7 @@ const FlightDetails = () => {
                         </div>
                         <TextInput
                           id="email1"
-                          type="email"
+                          type="number"
                           placeholder="Age"
                           required
                           className="w-[100px]"

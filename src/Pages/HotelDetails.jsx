@@ -431,7 +431,7 @@ const HotelDetails = () => {
             <h1 className="font-semibold mt-6 text-2xl border-l-4 border-yellow-300 px-2">
               General Amenities
             </h1>
-            <ul className="grid gap-4 grid-cols-3 mt-4 ml-8 list-disc">
+            <ul className="grid gap-4 grid-cols-3 max-sm:grid-cols-2   mt-4 ml-8 list-disc">
               {general_amenities.map((item, index) => (
                 <li key={index} className="font-semibold">
                   {item}
@@ -514,7 +514,7 @@ const HotelDetails = () => {
       >
         Rooms
       </h1>
-      <div className="rooms flex flex-wrap justify-evenly ml-3 gap-8 mt-6 mb-4">
+      <div className="rooms flex flex-wrap justify-evenly gap-8 mt-6 mb-4">
         {hotel.rooms &&
           [...hotel?.rooms].slice(0, 4).map((room) => (
             <div

@@ -13,6 +13,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { Button, Dropdown, Label, Sidebar, TextInput } from "flowbite-react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
+import getCurrentDate from "../utils/getCurrentDate";
 
 const Hotel = () => {
   const carouselSettings = {
@@ -33,6 +34,12 @@ const Hotel = () => {
   const [checkIn, setCheckIn] = useState("");
   const [checkOut, setCheckOut] = useState("");
   const [travellers, setTravellers] = useState("1 Room, 1 Adult");
+
+  const [errors, setErrors] = useState({
+    query: "",
+    checkIn: "",
+    checkOut: "",
+  });
 
   useEffect(() => {
     const getHotels = setTimeout(async () => {
@@ -57,18 +64,23 @@ const Hotel = () => {
   const navigate = useNavigate("");
 
   const redirectHotelSearch = () => {
-    if (!query || !checkIn || !checkOut) {
-      toast.error("Enter mandatory fields!", {
-        position: "top-center",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
+    if (!query) {
+      setErrors((prev) => {
+        return { ...prev, query: "NO QUERY" };
       });
+    }
+    if (!checkIn) {
+      setErrors((prev) => {
+        return { ...prev, checkIn: "No checkIn" };
+      });
+    }
+    if (!checkOut) {
+      setErrors((prev) => {
+        return { ...prev, checkOut: "No checkout" };
+      });
+    }
 
+    if (!query || !checkIn || !checkOut) {
       return;
     }
 
@@ -127,13 +139,42 @@ const Hotel = () => {
           <div className="booking-card">
             <div className="booking-card flex flex-col px-8 py-6 border-2 rounded-xl shadow-lg shadow-slate-200 my-6 relative">
               <section className="flex flex-col">
-                <div className="where flex flex-col border rounded-md mb-4">
-                  <input
-                    className="flex-1 rounded-md bg-slate-50 px-4 py-2"
+                <div className="where flex flex-col items-center rounded-md mb-4">
+                  {/* <input
+                    className="rounded-md w-1/2 border border-slate-400 bg-slate-50 px-4 py-2"
                     placeholder="Enter city?"
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
                     list="optionsList"
+                  /> */}
+                  <TextInput
+                    className="w-1/2 max-sm:w-full py-2"
+                    placeholder="Enter city?"
+                    value={query}
+                    onChange={(e) => {
+                      setQuery(e.target.value);
+                      setErrors((prev) => {
+                        return {
+                          ...prev,
+                          query: "",
+                        };
+                      });
+                    }}
+                    list="optionsList"
+                    shadow
+                    required
+                    color={errors.query ? "failure" : ""}
+                    helperText={
+                      errors.query ? (
+                        <>
+                          <span className="font-medium">
+                            Search cannot be empty!
+                          </span>
+                        </>
+                      ) : (
+                        ""
+                      )
+                    }
                   />
                   <div
                     className={`suggestions text-sm ${
@@ -155,25 +196,76 @@ const Hotel = () => {
                   </div>
                 </div>
               </section>
-              <div className="submit mt-6 max-sm:mt-2">
-                <div className="date-picker flex gap-6 max-sm:flex-col max-sm:gap-2">
-                  <input
-                    value={checkIn}
-                    onChange={(e) => setCheckIn(e.target.value)}
-                    type="date"
-                    className="rounded-lg border-stone-300 px-8 py-3 max-sm:w-full"
-                  />
+              <div className="submit flex flex-col items-center mt-2 max-sm:mt-2">
+                <div className="date-picker flex items-center mb-4 gap-6 max-sm:flex-col max-sm:gap-2">
+                  <div className="flex flex-col flex-wrap">
+                    <h1 className="font-bold">Select Check In</h1>
+                    <TextInput
+                      className="w-[250px] max-sm:w-full py-2"
+                      value={checkIn}
+                      onChange={(e) => {
+                        setCheckIn(e.target.value);
+                        setErrors((prev) => {
+                          return {
+                            ...prev,
+                            checkIn: "",
+                          };
+                        });
+                      }}
+                      type="date"
+                      min={getCurrentDate()}
+                      shadow
+                      required
+                      color={errors.checkIn ? "failure" : ""}
+                      helperText={
+                        errors.checkIn ? (
+                          <>
+                            <span className="font-medium">
+                              Enter valid check-in
+                            </span>
+                          </>
+                        ) : (
+                          ""
+                        )
+                      }
+                    />
+                  </div>
 
-                  <input
-                    value={checkOut}
-                    onChange={(e) => setCheckOut(e.target.value)}
-                    type="date"
-                    className="rounded-lg border-stone-300 px-8 py-3 max-sm:w-full"
-                  />
-                  <select className="rounded-lg border-stone-300 px-4 py-3">
-                    <option value="1 Room, 1 Adult">1 Room, 1 Adult</option>
-                  </select>
+                  <div className="flex flex-col flex-wrap">
+                    <h1 className="font-bold">Select Check Out</h1>
+                    <TextInput
+                      className="w-[250px] max-sm:w-full py-2"
+                      value={checkOut}
+                      onChange={(e) => {
+                        setCheckOut(e.target.value);
+                        setErrors((prev) => {
+                          return {
+                            ...prev,
+                            checkOut: "",
+                          };
+                        });
+                      }}
+                      type="date"
+                      shadow
+                      required
+                      color={errors.checkOut ? "failure" : ""}
+                      helperText={
+                        errors.checkOut ? (
+                          <>
+                            <span className="font-medium">
+                              Enter valid check-out
+                            </span>
+                          </>
+                        ) : (
+                          ""
+                        )
+                      }
+                    />
+                  </div>
                 </div>
+                <select className="rounded-lg mb-1 px-4 py-2">
+                  <option value="1 Room, 1 Adult">1 Room, 1 Adult</option>
+                </select>
                 <Button
                   gradientMonochrome="failure"
                   className="rounded-md w-1/3 text-lg mt-4 mx-auto max-sm:w-full"

@@ -14,9 +14,10 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-import { Button, Dropdown, Label, Sidebar, TextInput } from "flowbite-react";
+import { Button, Dropdown, Label, TextInput } from "flowbite-react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
+import getCurrentDate from "../utils/getCurrentDate";
 
 const Flight = () => {
   const [offers, setOffers] = useState([]);
@@ -30,6 +31,12 @@ const Flight = () => {
   const [classType, setClassType] = useState("Economy");
 
   const navigate = useNavigate();
+
+  const [errors, setErrors] = useState({
+    from: "",
+    to: "",
+    date: "",
+  });
 
   useEffect(() => {
     fetchOffers();
@@ -78,6 +85,10 @@ const Flight = () => {
   };
 
   const fetchAirports = async (e, type) => {
+    setErrors((prev) => {
+      return { ...prev, [type]: "" };
+    });
+
     const query = e.target.value;
 
     const updatedAirports = airportData.filter((airport) => {
@@ -91,28 +102,37 @@ const Flight = () => {
     if (type === "from") {
       setFrom(query);
       setFromAirports(updatedAirports);
-    } else {
+    } else if (type === "to") {
       setTo(query);
       setToAirports(updatedAirports);
+    } else {
+      setDate(e.target.value);
     }
 
     console.log("from airports", fromAirports);
   };
 
   const redirectFlightSearch = () => {
-    if (!from && !to && !date) {
-      toast.error("Enter mandatory fields!", {
-        position: "top-center",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
+    if (!from || !to || !date) {
+      if (!from) {
+        setErrors((prev) => {
+          return { ...prev, from: "Please select a departure location" };
+        });
+      }
+      if (!to) {
+        setErrors((prev) => {
+          return { ...prev, to: "Please select an arrival location" };
+        });
+      }
+      if (!date) {
+        setErrors((prev) => {
+          return { ...prev, date: "Please select date" };
+        });
+      }
+
       return;
     }
+    console.log("Date", date);
 
     if (from === to) {
       toast.error("Source and destination cannot be same !", {
@@ -244,12 +264,33 @@ const Flight = () => {
                   <div className="input flex items-center gap-4">
                     <MdOutlineFlightTakeoff className="text-2xl max-sm:hidden text-stone-400" />
                     <div className="from-search">
-                      <input
+                      {/* <input
                         className="w-[250px] max-sm:w-full px-2 py-2"
                         placeholder="Where from?"
                         value={from}
                         onChange={(e) => fetchAirports(e, "from")}
                         list="optionsList"
+                      /> */}
+                      <TextInput
+                        className="w-[250px] max-sm:w-full px-2 py-2"
+                        placeholder="Where from?"
+                        value={from}
+                        onChange={(e) => fetchAirports(e, "from")}
+                        list="optionsList"
+                        shadow
+                        required
+                        color={errors.from ? "failure" : ""}
+                        helperText={
+                          errors.from ? (
+                            <div className="ml-2">
+                              <span className="font-medium">
+                                Enter valid departure
+                              </span>
+                            </div>
+                          ) : (
+                            ""
+                          )
+                        }
                       />
                       <div className="suggestions">
                         <datalist
@@ -272,14 +313,35 @@ const Flight = () => {
                     <GoArrowSwitch />
                   </div>
                   <div className="input flex gap-4 items-center justify-center">
-                    <MdOutlineFlightLand className="text-2xl max-sm:hidden text-stone-400 ml-6" />
+                    <MdOutlineFlightLand className="text-2xl max-sm:hidden text-stone-400 " />
                     <div className="to-search">
-                      <input
+                      {/* <input
                         className="w-[250px] max-sm:w-full px-2 py-2"
                         placeholder="Where to?"
                         value={to}
                         onChange={(e) => fetchAirports(e, "to")}
                         list="optionsList2"
+                      /> */}
+                      <TextInput
+                        className="w-[250px] max-sm:w-full px-2 py-2"
+                        placeholder="Where to?"
+                        value={to}
+                        onChange={(e) => fetchAirports(e, "to")}
+                        list="optionsList2"
+                        shadow
+                        required
+                        color={errors.to ? "failure" : ""}
+                        helperText={
+                          errors.to ? (
+                            <>
+                              <span className="font-medium ml-2">
+                                Enter valid arrival
+                              </span>
+                            </>
+                          ) : (
+                            ""
+                          )
+                        }
                       />
                       <div className="suggestions">
                         <datalist
@@ -300,17 +362,43 @@ const Flight = () => {
                   </div>
                 </div>
               </section>
-              <div className="submit mt-6">
-                <div className="date-picker flex gap-6 w-full">
-                  <input
+              <div className="submit">
+                <div className="date-picker flex justify-center items-center gap-6 w-full">
+                  {/* <input
                     type="date"
                     value={date}
+                    placeholder="Select Date"
                     onChange={(e) => setDate(e.target.value)}
                     className="rounded-lg border-stone-300 px-4 py-3 w-1/2 max-sm:block"
-                  />
+                  /> */}
+                  <div className="flex flex-col flex-wrap">
+                    <h1 className="font-bold">Select Date</h1>
+                    <TextInput
+                      className="max-sm:w-full py-2"
+                      type="date"
+                      value={date}
+                      min={getCurrentDate()}
+                      onChange={(e) => fetchAirports(e, "date")}
+                      // list="optionsList2"
+                      shadow
+                      required
+                      color={errors.date ? "failure" : ""}
+                      helperText={
+                        errors.date ? (
+                          <>
+                            <span className="font-medium ml-2">
+                              Enter valid date
+                            </span>
+                          </>
+                        ) : (
+                          ""
+                        )
+                      }
+                    />
+                  </div>
                   <Button
                     gradientMonochrome="failure"
-                    className="rounded-md w-1/2 max-sm:block text-lg"
+                    className="rounded-md mt-6 max-sm:block text-lg"
                     onClick={redirectFlightSearch}
                   >
                     Search Flights
@@ -371,7 +459,6 @@ const Flight = () => {
           <Button color="gray" className="rounded-md w-1/2 text-lg">
             Learn More
           </Button>
-          <h1>Cross btn</h1>
         </div>
       </div>
       <h1 className="text-2xl font-bold my-4 sm:mt-4 border-l-4 max-sm:my-6 border-orange-500 pl-2">
