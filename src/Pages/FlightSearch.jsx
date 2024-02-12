@@ -286,8 +286,8 @@ const FlightSearch = () => {
                         }
                       >
                         <option value="">Select</option>
-                        <option value="1">Earliest to Latest</option>
-                        <option value="-1">Latest to Earliest</option>
+                        <option value="1">Early to Late</option>
+                        <option value="-1">Late to Early</option>
                       </select>
                     </div>
                     <div className="stops flex flex-col gap-1">

@@ -30,33 +30,34 @@ const FlightCard = ({
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetchFlightDetails();
+    // fetchFlightDetails();
   }, []);
 
-  const fetchFlightDetails = async () => {
-    const res1 = await fetch(
-      `${base_url}/airport?search={"city":"${source.split("_")[0]}"}`,
-      {
-        method: "GET",
-        headers,
-      }
-    );
-    const resJSON1 = await res1.json();
+  // const fetchFlightDetails = async () => {
+  //   const res1 = await fetch(
+  //     `${base_url}/airport?search={"city":"${source.split("_")[0]}"}`,
+  //     {
+  //       method: "GET",
+  //       headers,
+  //     }
+  //   );
+  //   const resJSON1 = await res1.json();
 
-    const res = await fetch(
-      `${base_url}/airport?search={"city":"${destination.split("_")[0]}"}`,
-      {
-        method: "GET",
-        headers,
-      }
-    );
-    const resJSON = await res.json();
+  //   const res = await fetch(
+  //     `${base_url}/airport?search={"city":"${destination.split("_")[0]}"}`,
+  //     {
+  //       method: "GET",
+  //       headers,
+  //     }
+  //   );
+  //   const resJSON = await res.json();
 
-    console.log("source Airport details", resJSON1);
+  //   console.log("source Airport details", resJSON1);
+  //   console.log("Destination Airport details", resJSON);
 
-    setSourceAirport(resJSON1.data.airports[0]);
-    setDestinationAirport(resJSON.data.airports[0]);
-  };
+  //   setSourceAirport(resJSON1.data.airports[0]);
+  //   setDestinationAirport(resJSON.data.airports[0]);
+  // };
 
   const bookFlight = () => {
     navigate(
@@ -148,7 +149,7 @@ const FlightCard = ({
             </div>
             <div className="airport-details">
               <h1 className="arrival">
-                <span className="text-xl">{source.split("_")[0]}</span>{" "}
+                <span className="text-xl">{destination.split("_")[0]}</span>{" "}
                 <span className="text-xl font-bold">{arrivalTime}</span>
               </h1>
               <div className="date">
